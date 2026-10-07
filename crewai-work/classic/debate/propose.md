@@ -1,0 +1,9 @@
+I strongly support the motion that the USA was better than the USSR in 1980 Olympic hockey.
+
+The simplest proof is the result that matters most: **the United States beat the Soviet Union in direct competition**. In hockey, especially at the Olympic level, head-to-head performance is the clearest measure of superiority. The USSR entered the tournament as the dominant favorite, loaded with experienced professionals in all but name, while the U.S. team was young, largely collegiate, and widely expected to lose. Yet the Americans defeated them in one of the most famous upsets in sports history. That is not luck alone — it is evidence that, on that day and in that tournament, the U.S. team was better prepared, better disciplined, and better executed.
+
+The Soviet team may have had more reputation and deeper international success before the Games, but **better in 1980 means better in the tournament itself**, and the U.S. proved it when it counted. The Americans did not merely survive; they outplayed the Soviets with speed, structure, and belief. Their victory showed superior teamwork, coaching, and mental toughness under pressure.
+
+Most importantly, the U.S. went on to win the **gold medal**, while the USSR did not. That settles the question of who was better in the 1980 Olympic hockey competition: the team that won the tournament. The Soviets were great, but greatness on paper is not the same as being better in reality. In 1980, the United States earned that distinction.
+
+So the argument is clear: **the USA was better than the USSR in 1980 Olympic hockey because they beat them directly, performed better under pressure, and finished with the gold medal.**
