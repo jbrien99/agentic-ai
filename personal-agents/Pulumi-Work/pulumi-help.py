@@ -5,14 +5,15 @@ import requests
 from dotenv import load_dotenv
 from openai.types.responses import ResponseTextDeltaEvent
 from agents import Agent, Runner, trace, function_tool, SQLiteSession
+from tools.notifier import push
 import asyncio
 load_dotenv(override=True)
 
 async def get_common_errors():
-  agent = Agent(name="PulumiCommonErrors", instructions="You are a python pulumi (Insfrastruce As Code) developer and have a vast knowlege of common errors when using pulumi to deploy Kubernetes resources", model="gpt-5.4-mini")
+  agent = Agent(name="PulumiCommonErrors", instructions="You are a python pulumi (Insfrastruce As Code) developer and have a vast knowlege of common errors when using pulumi to deploy Kubernetes resources", model="gpt-5.4-mini", tools=[push])
   # Go to https://platform.openai.com/logs?api=traces to see the traces
   with trace("Top10PulumiErrorsK8s"):
-    result = Runner.run_streamed(agent,"What are the top 10 most common issues when using Python pulumi to deploy resource to Kubernetes")
+    result = Runner.run_streamed(agent,"What are the top 10 most common issues when using Python pulumi to deploy resource to Kubernetes. After preparing the top 10 issues, call the push tool with the list.")
     async for event in result.stream_events():
       if event.type == "raw_response_event" and isinstance(event.data, ResponseTextDeltaEvent):
         print(event.data.delta, end="", flush=True)
