@@ -9,9 +9,13 @@ import asyncio
 load_dotenv(override=True)
 
 async def launch_mcp_server():
-  params = {"command": "uv", "args": ["run", "-m", "backend.accounts_server" ]}
+  params = {
+      "command": "uv",
+      "args": ["run", "--with", "mcp<2", "--with", "massive", "-m", "backend.accounts_server"],
+  }
   async with MCPServerStdio(params=params, client_session_timeout_seconds=60) as server:
     mcp_tools = await server.list_tools()
+    print(f"{mcp_tools}")
 
 async def main():
   return await launch_mcp_server()

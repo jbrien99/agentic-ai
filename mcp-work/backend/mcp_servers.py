@@ -26,15 +26,23 @@ if massive_api_key:
 else:
     market_params = {
         "command": "uv",
-        "args": ["run", "-m", "backend.market_server"],
+        "args": ["run", "--with", "mcp<2", "--with", "massive", "-m", "backend.market_server"],
         "cwd": PROJECT_DIR
     }
 
 def trader_mcp_servers() -> list[MCPServerStdio]:
     """The trader's MCP servers: our Accounts server, Push Notification and Market data."""
     params = [
-        {"command": "uv", "args": ["run", "-m", "backend.accounts_server"], "cwd": PROJECT_DIR},
-        {"command": "uv", "args": ["run", "-m", "backend.push_server"], "cwd": PROJECT_DIR},
+        {
+            "command": "uv",
+            "args": ["run", "--with", "mcp<2", "--with", "massive", "-m", "backend.accounts_server"],
+            "cwd": PROJECT_DIR,
+        },
+        {
+            "command": "uv",
+            "args": ["run", "--with", "mcp<2", "--with", "requests", "-m", "backend.push_server"],
+            "cwd": PROJECT_DIR,
+        },
         market_params,
     ]
     return [MCPServerStdio(p, client_session_timeout_seconds=TIMEOUT) for p in params]
@@ -55,11 +63,14 @@ def researcher_mcp_servers(name: str) -> list[MCPServerStdio]:
         client_session_timeout_seconds=TIMEOUT,
         tool_filter=create_static_tool_filter(allowed_tool_names=["tavily_search"]),
     )
+    memory_dir = Path(PROJECT_DIR) / "memory"
+    memory_dir.mkdir(parents=True, exist_ok=True)
     memory = MCPServerStdio(
         {
             "command": "npx",
             "args": ["-y", "mcp-memory-libsql"],
             "env": {"LIBSQL_URL": f"file:./memory/{name}.db"},
+            "cwd": PROJECT_DIR,
         },
         client_session_timeout_seconds=TIMEOUT,
     )
