@@ -10,8 +10,9 @@ load_dotenv(override=True)
 
 async def get_common_errors():
   agent = Agent(name="PulumiCommonErrors", instructions="You are a python pulumi (Insfrastruce As Code) developer and have a vast knowlege of common errors when using pulumi to deploy Kubernetes resources", model="gpt-5.4-mini")
-
-  result = await Runner.run(agent,"What are the top 10 most common issues when using Python pulumi to deploy resource to Kubernetes") 
+  # Go to https://platform.openai.com/logs?api=traces to see the traces
+  with trace("Top10PulumiErrorsK8s"):
+    result = await Runner.run(agent,"What are the top 10 most common issues when using Python pulumi to deploy resource to Kubernetes") 
   return result
 
 
