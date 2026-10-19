@@ -1,3 +1,6 @@
+------------------------------------------------------------
+Structured output notes:
+
 Before putting structure output into place, I was getting back, as expected, plain text similar to this:
 
 1. Misusing `Output` values as plain strings/ints
@@ -57,3 +60,9 @@ cat structured_output.txt | jq
     }
   ]
 }
+------------------------------------------------------------
+MCP server (serper) use.  After putting the MCP server use in place, 
+you must go to https://platform.openai.com/logs?api=traces to 
+see it was used. Because we used with trace("Top10PulumiErrorsK8s"), 
+you'd look at the trace named "Top10PulumiErrorsK8s"
+------------------------------------------------------------
