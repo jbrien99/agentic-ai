@@ -23,9 +23,15 @@ class CommonPulumiIssues(BaseModel):
   issues: list[CommonPulumiIssue] # This forces the model to stream an array of 10 items
 
 async def get_common_errors():
-
-  await serper_mcp.connect()
-
+  result = ""
+  try:
+    # This is where the background process actually executes and fails
+    await serper_mcp.connect()
+  except Exception as e:
+    # This catches the failure, and prints your custom message
+    print("\n❌ MCP Server may not be defined correctly.")
+    return None
+  
   agent = Agent(name="PulumiCommonErrors", instructions="You are a python pulumi (Insfrastruce As Code) developer and have a vast knowlege of common errors when using pulumi to deploy Kubernetes resources", model="gpt-5.4-mini", tools=[push], output_type=CommonPulumiIssues, mcp_servers=[serper_mcp])
   # Go to https://platform.openai.com/logs?api=traces to see the traces
   with trace("Top10PulumiErrorsK8s"):
@@ -33,7 +39,6 @@ async def get_common_errors():
     async for event in result.stream_events():
       if event.type == "raw_response_event" and isinstance(event.data, ResponseTextDeltaEvent):
         print(event.data.delta, end="", flush=True)
-      
   return result
 
 
