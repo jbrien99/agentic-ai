@@ -89,11 +89,6 @@ Solution to Incorrect use of Output values (forgetting .apply, passing unresolve
     If you’re seeing this in a Kubernetes deployment, it usually means you passed an `Output` into something that expects a real string/object.
 
     Rule of thumb: **Pulumi resource inputs can accept Outputs; ordinary Python code cannot.**
-- 3 new item(s)
-- 2 raw response(s)
-- 0 input guardrail result(s)
-- 0 output guardrail result(s)
-(See `RunResult` for more details)
 ================================================================
 Find the common solution to Missing resource dependencies / wrong ordering (resources created before Namespace, CRD, Secret, etc.)., ranked as 2
 Solution to Missing resource dependencies / wrong ordering (resources created before Namespace, CRD, Secret, etc.).: RunResult:
@@ -150,13 +145,7 @@ Solution to Missing resource dependencies / wrong ordering (resources created be
     2. the dependency is not actually referenced in the resource inputs, so Pulumi doesn’t know about it.
 
     If you want, I can give you a **Pulumi Python pattern for Namespace + Secret + Deployment + CRD/CR**.
-- 1 new item(s)
-- 1 raw response(s)
-- 0 input guardrail result(s)
-- 0 output guardrail result(s)
-(See `RunResult` for more details)
 =====================================================================
-
 Find the common solution to Namespace mistakes (resource lands in default namespace or namespace not created/assigned)., ranked as 3
 Solution to Namespace mistakes (resource lands in default namespace or namespace not created/assigned).: RunResult:
 - Last agent: Agent(name="PulumiCommonErrors", ...)
@@ -195,12 +184,6 @@ Solution to Namespace mistakes (resource lands in default namespace or namespace
       `Namespace`, `ClusterRole`, `CustomResourceDefinition`, etc. do not use namespaces.
 
     Most common root cause: **the resource was created without `metadata.namespace`, so Kubernetes defaulted it to `default`.**
-- 1 new item(s)
-- 1 raw response(s)
-- 0 input guardrail result(s)
-- 0 output guardrail result(s)
-(See `RunResult` for more details)
-
 =====================================================================
 Find the common solution to Provider/authentication issues (bad kubeconfig, expired token, wrong cluster context)., ranked as 4
 Solution to Provider/authentication issues (bad kubeconfig, expired token, wrong cluster context).: RunResult:
@@ -243,12 +226,6 @@ Solution to Provider/authentication issues (bad kubeconfig, expired token, wrong
       - Remove or refresh cloud auth caches if the token is stuck/expired.
 
     If you want, I can turn this into a Pulumi-specific troubleshooting checklist or map it to EKS/GKE/AKS separately.
-- 1 new item(s)
-- 1 raw response(s)
-- 0 input guardrail result(s)
-- 0 output guardrail result(s)
-(See `RunResult` for more details)
-
 =====================================================================
 Find the common solution to Helm chart ordering issues with CRDs/custom resources (CRD not ready before CR creation)., ranked as 5
 Solution to Helm chart ordering issues with CRDs/custom resources (CRD not ready before CR creation).: RunResult:
@@ -289,12 +266,6 @@ Solution to Helm chart ordering issues with CRDs/custom resources (CRD not ready
     The error happens because Kubernetes accepts the CRD object before the API server has fully established the new type. Explicit dependency ordering prevents Pulumi from racing ahead.
 
     If you want, I can show the **best Pulumi Python pattern for Helm charts with CRDs** (including `Chart` vs `Release` vs raw YAML).
-- 1 new item(s)
-- 1 raw response(s)
-- 0 input guardrail result(s)
-- 0 output guardrail result(s)
-(See `RunResult` for more details)
-
 =====================================================================
 Find the common solution to Mixing Pulumi resource options incorrectly (provider/depends_on handling, especially with dynamic providers/outputs)., ranked as 6
 
@@ -326,12 +297,6 @@ Solution to Mixing Pulumi resource options incorrectly (provider/depends_on hand
     - **`dependsOn`** = ordering only
 
     For dynamic providers, keep those concerns separate.
-- 9 new item(s)
-- 3 raw response(s)
-- 0 input guardrail result(s)
-- 0 output guardrail result(s)
-(See `RunResult` for more details)
-
 =====================================================================
 Find the common solution to API version / kind mismatches (using deprecated or wrong Kubernetes API versions)., ranked as 7
 Solution to API version / kind mismatches (using deprecated or wrong Kubernetes API versions).: RunResult:
@@ -358,12 +323,6 @@ Solution to API version / kind mismatches (using deprecated or wrong Kubernetes 
     ```
 
     If you want, I can list the most common deprecated Kubernetes APIs and their replacements.
-- 1 new item(s)
-- 1 raw response(s)
-- 0 input guardrail result(s)
-- 0 output guardrail result(s)
-(See `RunResult` for more details)
-
 =====================================================================
 Find the common solution to Readiness/await behavior problems (deployment hangs, pods not becoming ready, skipAwait/await semantics)., ranked as 8
 Solution to Readiness/await behavior problems (deployment hangs, pods not becoming ready, skipAwait/await semantics).: RunResult:
@@ -389,13 +348,7 @@ Solution to Readiness/await behavior problems (deployment hangs, pods not becomi
     - **Kubernetes object has no useful readiness signal** → `skipAwait: true`.
 
     If you want, I can give you a Pulumi YAML/TypeScript example showing `skipAwait` vs default await behavior.
-- 1 new item(s)
-- 1 raw response(s)
-- 0 input guardrail result(s)
-- 0 output guardrail result(s)
-(See `RunResult` for more details)
 =====================================================================
-
 Find the common solution to Secret/config handling mistakes (ConfigMap vs Secret, leaking sensitive values, wrong serialization)., ranked as 9
 Solution to Secret/config handling mistakes (ConfigMap vs Secret, leaking sensitive values, wrong serialization).: RunResult:
 - Last agent: Agent(name="PulumiCommonErrors", ...)
@@ -435,12 +388,6 @@ Solution to Secret/config handling mistakes (ConfigMap vs Secret, leaking sensit
     ```
 
     If you want, I can also give you a short checklist for debugging “Secret created but app can’t read it” issues.
-- 1 new item(s)
-- 1 raw response(s)
-- 0 input guardrail result(s)
-- 0 output guardrail result(s)
-(See `RunResult` for more details)
-
 =====================================================================
 Find the common solution to Drift/state issues after failed updates (refresh/import/replace problems, resources stuck or orphaned)., ranked as 10
 Solution to Drift/state issues after failed updates (refresh/import/replace problems, resources stuck or orphaned).: RunResult:
@@ -493,9 +440,3 @@ Solution to Drift/state issues after failed updates (refresh/import/replace prob
     - **State is inconsistent after failure** → **refresh, then import/delete as needed**
 
     If you want, I can give you a **step-by-step recovery checklist** or **exact commands for a specific broken resource**.
-- 1 new item(s)
-- 1 raw response(s)
-- 0 input guardrail result(s)
-- 0 output guardrail result(s)
-(See `RunResult` for more details)
-
